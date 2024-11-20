@@ -1,12 +1,9 @@
 import sys
 import os
 
-# File paths for storing user data and scores
 USER_FILE = "users.txt"
 SCORE_FILE = "scores.txt"
 
-
-#⚠️⚠️ RESPECTED SIR THESE QUESTIONS ARE GENERATED WITH THE HELP OF GPT SO NEVER MIND I NEEDED TO SPEED UP THE DEV
 quizzes = {
     'python': [
         {'question': "What is the output of print(2 ** 3)?", 'options': ['6', '8', '9', '12'], 'answer': '8'},
@@ -31,8 +28,6 @@ quizzes = {
     ]
 }
 
-
-# Helper function to read users from file
 def load_users():
     users = {}
     if os.path.exists(USER_FILE):
@@ -42,12 +37,10 @@ def load_users():
                 users[username] = password
     return users
 
-# Helper function to save a new user to the file
 def save_user(username, password):
     with open(USER_FILE, "a") as file:
         file.write(f"{username},{password}\n")
 
-# Helper function to delete a user
 def delete_user(username):
     users = load_users()
     if username in users:
@@ -59,7 +52,7 @@ def delete_user(username):
     else:
         print("User not found.")
 
-# Function to register a new user
+
 def register():
     print("\nRegister")
     username = input("Enter username: ")
@@ -71,7 +64,7 @@ def register():
         save_user(username, password)
         print("Registration successful! Please login to continue.")
 
-# Function to login
+
 def login():
     print("\nLogin")
     username = input("Enter username: ")
@@ -87,12 +80,12 @@ def login():
         print("Incorrect password.")
         return None
 
-# Function to get the highest score from the file
+
 def get_high_score(username, quiz_type):
     scores = load_scores()
     return scores.get(username, {}).get(quiz_type, 0)
 
-# Helper function to load scores
+
 def load_scores():
     scores = {}
     if os.path.exists(SCORE_FILE):
@@ -104,7 +97,6 @@ def load_scores():
                 scores[username][quiz_type] = int(score)
     return scores
 
-# Helper function to save or update the score in the file
 def save_score(username, quiz_type, score):
     scores = load_scores()
     if username not in scores:
@@ -116,7 +108,6 @@ def save_score(username, quiz_type, score):
                 for quiz, s in quizzes.items():
                     file.write(f"{user},{quiz},{s}\n")
 
-# Function to display and handle quiz attempts
 def attempt_quiz(username):
     print("\nSelect a quiz:")
     print("1. Python")
@@ -134,7 +125,6 @@ def attempt_quiz(username):
         print("Invalid choice. Returning to main menu.")
         return
 
-    # Start the selected quiz
     score = 0
     for question in quizzes[quiz_type]:
         print("\n" + question['question'])
@@ -142,7 +132,6 @@ def attempt_quiz(username):
             print(f"{i}. {option}")
         
         try:
-            # Get user input and validate
             user_choice = int(input("Enter your choice (1-4): "))
             if 1 <= user_choice <= len(question['options']):
                 selected_option = question['options'][user_choice - 1]
@@ -159,7 +148,7 @@ def attempt_quiz(username):
     print(f"Your highest score in {quiz_type} quiz: {high_score}")
 
 
-# Main application loop
+
 while True:
     print("\nMain Menu")
     print("1. Register")
