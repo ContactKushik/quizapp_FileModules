@@ -30,8 +30,8 @@ A simple quiz application built in Python that allows users to register, login, 
 1. Clone the repository:
 
     ```bash
-    git clone https://github.com/ContactKushik/quiz-app.git
-    cd quiz-app
+    git clone https://github.com/ContactKushik/quizapp_FileModules/
+  
     ```
 
 2. Run the application:
